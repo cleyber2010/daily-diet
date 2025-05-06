@@ -1,0 +1,30 @@
+{
+  "name": "api-rest-node",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch ./src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ https://github.com/cleyber2010/daily-diet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": " https://github.com/cleyber2010/daily-diet.git/issues"
+  },
+  "homepage": " https://github.com/cleyber2010/daily-diet.git#readme",
+  "description": "",
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "fastify": "^5.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.11",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
