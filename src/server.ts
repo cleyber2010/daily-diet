@@ -13,7 +13,7 @@ app.register(snackRoutes, {
 })
 app.register(metricRoutes, {
     prefix: 'metrics'
-})
+});
 
 app.listen({
     port:8080
