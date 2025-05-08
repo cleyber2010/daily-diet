@@ -3,14 +3,10 @@ import {checkLogin} from "../middlewares/check-login";
 import {knexDb} from "../database";
 
 export async function snackRoutes(app: FastifyInstance) {
-
-
     app.addHook('preHandler', checkLogin);
 
     app.get('/', (request, reply) => {
         return "Get snacks"
-    app.get('/', async (request, reply) => {
-        return knexDb('sqlite_schema').select("*")
     });
 
     app.post('/', (request, reply) => {
