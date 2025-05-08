@@ -2,8 +2,11 @@ import {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import { knexDb } from "../database";
 import { z } from "zod";
 import {randomUUID} from "node:crypto";
+import {checkLogin} from "../middlewares/check-login";
 
 export async function userRoutes(app: FastifyInstance) {
+
+    app.addHook('preHandler', checkLogin);
 
     app.get('/', async (request, reply) => {
         const users = await knexDb("users").select("*");

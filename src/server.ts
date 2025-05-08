@@ -4,9 +4,11 @@ import {snackRoutes} from "./routes/snackRoutes";
 import {metricRoutes} from "./routes/metricRoutes";
 import {loginRoutes} from "./routes/loginRoutes";
 import {fastifyCookie} from "@fastify/cookie";
+import {checkLogin} from "./middlewares/check-login";
 
 const app = fastify();
 app.register(fastifyCookie);
+
 app.register(loginRoutes, {
     prefix: 'login'
 });
