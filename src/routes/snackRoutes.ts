@@ -1,8 +1,9 @@
 import {FastifyInstance} from "fastify";
+import {knexDb} from "../database";
 
 export async function snackRoutes(app: FastifyInstance) {
-    app.get('/', (request, reply) => {
-        return "Get snacks"
+    app.get('/', async (request, reply) => {
+        return knexDb('sqlite_schema').select("*")
     });
 
     app.post('/', (request, reply) => {
