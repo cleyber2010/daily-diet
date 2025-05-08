@@ -1,11 +1,19 @@
 import fastify from 'fastify';
-import { knexDb } from './database'
+import {userRoutes} from "./routes/userRoutes";
+import {snackRoutes} from "./routes/snackRoutes";
+import {metricRoutes} from "./routes/metricRoutes";
 
 const app = fastify();
 
-app.get('/users', async () => {
-    return knexDb('sqlite_schema').select("*")
+app.register(userRoutes, {
+    prefix: 'users'
 });
+app.register(snackRoutes, {
+    prefix: 'snacks'
+})
+app.register(metricRoutes, {
+    prefix: 'metrics'
+})
 
 app.listen({
     port:8080
