@@ -1,16 +1,47 @@
 import {FastifyInstance} from "fastify";
 import {checkLogin} from "../middlewares/check-login";
 import {knexDb} from "../database";
+import { z } from "zod";
+import {randomUUID} from "node:crypto";
 
 export async function snackRoutes(app: FastifyInstance) {
     app.addHook('preHandler', checkLogin);
 
-    app.get('/', (request, reply) => {
-        return "Get snacks"
+    app.get('/', async (request, reply) => {
+        const userId = request.cookies.userId;
+
+        const snacks = await knexDb('snacks').select("*").where({
+            'user_id': userId
+        });
+
+        return reply.status(200).send({
+            snacks
+        })
     });
 
-    app.post('/', (request, reply) => {
+    app.post('/', async (request, reply) => {
 
+        const snackRequestSchema = z.object({
+            name: z.string(),
+            description: z.string(),
+            isInside: z.boolean()
+        });
+
+        const { name, description, isInside } = snackRequestSchema.parse(request.body);
+        const userId = request.cookies.userId;
+
+        console.log("userId ", userId);
+
+        await knexDb('snacks').insert({
+            id: randomUUID(),
+            user_id: userId,
+            name,
+            description,
+            isInside,
+
+        });
+
+        return reply.status(201).send({});
     })
 
     app.get('/:id', (request, reply) => {
