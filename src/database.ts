@@ -1,7 +1,7 @@
 import knex, { Knex } from 'knex';
 import 'dotenv/config';
 
-const optionsKnex: Knex.Config = {
+export const optionsKnex: Knex.Config = {
     client: 'sqlite3',
     connection: {
         filename: './database/app.db'
