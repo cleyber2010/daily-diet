@@ -3,6 +3,7 @@ import { knexDb } from "../database";
 import { z } from "zod";
 import {randomUUID} from "node:crypto";
 import {checkLogin} from "../middlewares/check-login";
+import {fastifyCookie} from "@fastify/cookie";
 
 export async function userRoutes(app: FastifyInstance) {
 
