@@ -30,8 +30,6 @@ export async function snackRoutes(app: FastifyInstance) {
         const { name, description, isInside } = snackRequestSchema.parse(request.body);
         const userId = request.cookies.userId;
 
-        console.log("userId ", userId);
-
         await knexDb('snacks').insert({
             id: randomUUID(),
             user_id: userId,
