@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Cleyber\",\r\n    \"lastName\": \"F. Matos\",\r\n    \"email\": \"cleyber.fernandes@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"teste\",\r\n    \"email\": \"teste@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,7 +166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"cleyber.fernandes@gmail.com\",\r\n    \"password\": \"1020304050\"\r\n}",
+							"raw": "{\r\n    \"email\": teste@teste.com\"\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
