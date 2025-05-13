@@ -7,7 +7,7 @@ import {fastifyCookie} from "@fastify/cookie";
 
 export async function userRoutes(app: FastifyInstance) {
 
-    app.addHook('preHandler', checkLogin);
+    //app.addHook('preHandler', checkLogin);
 
     app.get('/', async (request, reply) => {
         const users = await knexDb("users").select("*");
@@ -23,10 +23,9 @@ export async function userRoutes(app: FastifyInstance) {
             lastName: z.string(),
             email: z.string()
         });
-
         const { firstName, lastName, email } = userRequestSchema.parse(request.body);
 
-        await knexDb('users').insert({
+        const test = await knexDb('users').insert({
             id: randomUUID(),
             firstName,
             lastName,
