@@ -45,7 +45,22 @@ export async function snackRoutes(app: FastifyInstance) {
     })
 
     app.get('/:id', async (request, reply) => {
+        const userId = request.cookies.userId;
 
+        const snackIdSchema = z.object({
+            id: z.string()
+        })
+
+        const { id } = snackIdSchema.parse(request.params);
+
+        const snack = await knexDb("snacks").select("*").where({
+            id,
+            user_id: userId,
+        })
+
+        return reply.status(200).send({
+            snack
+        })
     })
 
     app.put('/:id', async (request, reply) => {
@@ -75,7 +90,20 @@ export async function snackRoutes(app: FastifyInstance) {
         return reply.status(200).send({});
     })
 
-    app.delete('/:id', (request, reply) => {
+    app.delete('/:id', async (request, reply) => {
+        const userId = request.cookies.userId;
 
+        const snackIdSchema = z.object({
+            id: z.string()
+        })
+
+        const { id } = snackIdSchema.parse(request.params);
+
+        await knexDb('snacks').where({
+            id,
+            user_id: userId,
+        }).del();
+
+        return reply.status(204).send({});
     })
 }
