@@ -44,12 +44,35 @@ export async function snackRoutes(app: FastifyInstance) {
         return reply.status(201).send({});
     })
 
-    app.get('/:id', (request, reply) => {
+    app.get('/:id', async (request, reply) => {
 
     })
 
-    app.put('/:id', (request, reply) => {
+    app.put('/:id', async (request, reply) => {
+        const userId = request.cookies.userId;
 
+        const snackIdSchema = z.object({
+            id: z.string()
+        })
+        const snackRequestSchema = z.object({
+            name: z.string(),
+            description: z.string(),
+            isInside: z.boolean()
+        })
+
+        const { name, description, isInside } = snackRequestSchema.parse(request.body);
+        const { id } = snackIdSchema.parse(request.params);
+
+        await knexDb('snacks').update({
+            name,
+            description,
+            isInside
+        }).where({
+            id,
+            user_id: userId,
+        });
+
+        return reply.status(200).send({});
     })
 
     app.delete('/:id', (request, reply) => {
